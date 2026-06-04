@@ -1,0 +1,33 @@
+<svg width="280" height="72" viewBox="0 0 280 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SmartDigitalMinds logo</title>
+  <desc id="desc">A compact connected agent network mark beside the SmartDigitalMinds wordmark.</desc>
+  <defs>
+    <linearGradient id="flow" x1="14" y1="17" x2="69" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19D7C2"/>
+      <stop offset="1" stop-color="#1B7DFF"/>
+    </linearGradient>
+    <linearGradient id="wordAccent" x1="116" y1="29" x2="258" y2="43" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19D7C2"/>
+      <stop offset="1" stop-color="#22B9D8"/>
+    </linearGradient>
+  </defs>
+
+  <g aria-hidden="true">
+    <path d="M17.6 33.6C25.7 19.4 37.8 15 48.1 23.5C55.2 29.4 55.7 38.6 48.7 44.4C38.9 52.5 28.1 49.6 17.6 33.6Z" stroke="#0B1F3A" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M47.9 23.5C57.1 13.8 69.4 16.2 73.2 27.2C76.4 36.3 69.3 44.9 58.3 44.6" stroke="url(#flow)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M23.6 40.2C33.6 53.7 49.3 56.2 61.8 46.7" stroke="url(#flow)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18 33.5L35.8 25.8L48.7 44.4L58.3 44.6L73.2 27.2" stroke="#D8F8F4" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M55.6 48.5L62.5 56.8L76.2 37.1" stroke="#F2A83B" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <circle cx="17.8" cy="33.5" r="5.3" fill="#0B1F3A"/>
+    <circle cx="35.8" cy="25.8" r="5.8" fill="#19D7C2"/>
+    <circle cx="48.7" cy="44.4" r="5.4" fill="#0B1F3A"/>
+    <circle cx="58.3" cy="44.6" r="5.2" fill="#1B7DFF"/>
+    <circle cx="73.2" cy="27.2" r="5.8" fill="#19D7C2"/>
+    <circle cx="62.5" cy="56.8" r="3.1" fill="#F2A83B"/>
+  </g>
+
+  <text x="86" y="43" font-family="Inter, Avenir Next, Segoe UI, Arial, sans-serif" font-size="18" font-weight="850" letter-spacing="0">
+    <tspan fill="#0B1F3A">Smart</tspan><tspan fill="url(#wordAccent)">DigitalMinds</tspan>
+  </text>
+</svg>

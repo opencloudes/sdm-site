@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SmartDigitalMinds icon</title>
+  <desc id="desc">A compact connected agent network mark with a value signal.</desc>
+  <defs>
+    <linearGradient id="iconFlow" x1="42" y1="42" x2="218" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19D7C2"/>
+      <stop offset="1" stop-color="#1B7DFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="36" fill="#0B1F3A"/>
+  <path d="M55 121C82 76 119 62 151 87C172 105 173 134 151 151C122 174 88 163 55 121Z" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M151 87C179 54 218 62 231 98C242 131 216 160 178 156" stroke="url(#iconFlow)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M74 137C108 183 159 190 200 161" stroke="url(#iconFlow)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M57 121L115 96L151 151L178 156L231 98" stroke="#D8F8F4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M166 168L189 190L231 127" stroke="#F2A83B" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="55" cy="121" r="16" fill="#FFFFFF"/>
+  <circle cx="115" cy="96" r="14" fill="#19D7C2"/>
+  <circle cx="151" cy="151" r="14" fill="#FFFFFF"/>
+  <circle cx="178" cy="156" r="13" fill="#1B7DFF"/>
+  <circle cx="231" cy="98" r="16" fill="#19D7C2"/>
+  <circle cx="189" cy="190" r="9" fill="#F2A83B"/>
+</svg>
