@@ -10,6 +10,20 @@ const formatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
+function cleanWhatsAppNumber(phoneNumber) {
+  return String(phoneNumber || "").replace(/[^\d]/g, "");
+}
+
+function isWhatsAppMarketReady(market) {
+  return cleanWhatsAppNumber(market.phoneNumberE164).length >= 8;
+}
+
+function buildWhatsAppUrl(market, fallbackMessage) {
+  const phone = cleanWhatsAppNumber(market.phoneNumberE164);
+  const message = encodeURIComponent(market.message || fallbackMessage);
+  return `https://wa.me/${phone}?text=${message}`;
+}
+
 function updateFocus(event) {
   const selected = event.target.closest("[data-focus]");
   if (!selected) return;
@@ -43,9 +57,55 @@ function updateCalculator(form) {
   form.querySelector("[data-total]").textContent = formatter.format(total);
 }
 
+function renderWhatsAppMarkets() {
+  const mount = document.querySelector("[data-whatsapp-markets]");
+  const config = window.SDM_WHATSAPP_CONFIG;
+  if (!mount || !config?.markets?.length) return;
+
+  mount.innerHTML = config.markets.map((market) => {
+    const ready = isWhatsAppMarketReady(market);
+    const status = ready ? "Ready for inbound WhatsApp" : "Number pending";
+    const phoneLabel = market.phoneNumberE164 || "Delegated in whatsapp.config.js";
+    const accountLabel = market.whatsappBusinessAccountId || "Account ID pending";
+    const phoneIdLabel = market.phoneNumberId || "Phone number ID pending";
+    const action = ready
+      ? `<a class="button button--primary whatsapp-card__button" href="${buildWhatsAppUrl(market, config.defaultMessage)}" target="_blank" rel="noopener">Open WhatsApp</a>`
+      : `<span class="button whatsapp-card__button is-disabled" aria-disabled="true">Waiting for number</span>`;
+
+    return `
+      <article class="whatsapp-card" data-market="${market.id}">
+        <span class="whatsapp-card__status ${ready ? "is-ready" : ""}">${status}</span>
+        <h3>${market.label}</h3>
+        <dl class="whatsapp-card__details">
+          <div>
+            <dt>Business</dt>
+            <dd>${market.legalEntity}</dd>
+          </div>
+          <div>
+            <dt>WhatsApp number</dt>
+            <dd>${phoneLabel}</dd>
+          </div>
+          <div>
+            <dt>Business account</dt>
+            <dd>${accountLabel}</dd>
+          </div>
+          <div>
+            <dt>Phone number ID</dt>
+            <dd>${phoneIdLabel}</dd>
+          </div>
+        </dl>
+        <p>${market.complianceNote}</p>
+        ${action}
+      </article>
+    `;
+  }).join("");
+}
+
 document.querySelector(".focus-strip")?.addEventListener("click", updateFocus);
 
 document.querySelectorAll("[data-calculator]").forEach((form) => {
   updateCalculator(form);
   form.addEventListener("input", () => updateCalculator(form));
 });
+
+renderWhatsAppMarkets();

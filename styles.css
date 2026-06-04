@@ -431,6 +431,108 @@ input {
   line-height: 1;
 }
 
+.whatsapp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.whatsapp-card {
+  display: grid;
+  gap: 16px;
+  min-height: 360px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 12px 28px rgba(11, 31, 58, 0.06);
+}
+
+.whatsapp-card__status {
+  justify-self: start;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid rgba(242, 168, 59, 0.42);
+  border-radius: 8px;
+  color: #835511;
+  background: rgba(242, 168, 59, 0.16);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.whatsapp-card__status.is-ready {
+  color: #075a50;
+  border-color: rgba(25, 215, 194, 0.48);
+  background: rgba(25, 215, 194, 0.18);
+}
+
+.whatsapp-card h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.whatsapp-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.whatsapp-card__details {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.whatsapp-card__details div {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.whatsapp-card__details dt {
+  color: var(--navy);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.whatsapp-card__details dd {
+  margin: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.whatsapp-card__button {
+  align-self: end;
+  margin-top: auto;
+}
+
+.button.is-disabled {
+  color: var(--muted);
+  border-color: var(--line);
+  background: var(--paper);
+}
+
+.whatsapp-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.whatsapp-flow span {
+  min-height: 52px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--navy);
+  background: var(--paper);
+  font-weight: 850;
+  text-align: center;
+}
+
 .sector-list {
   display: flex;
   flex-wrap: wrap;
@@ -528,14 +630,20 @@ input {
 
   .intro__grid,
   .agent-grid,
+  .whatsapp-grid,
   .run-layout,
   .value__inner,
   .contact__inner {
     grid-template-columns: 1fr;
   }
 
+  .whatsapp-flow {
+    grid-template-columns: 1fr;
+  }
+
   .agent-card,
-  .intro__grid article {
+  .intro__grid article,
+  .whatsapp-card {
     min-height: auto;
   }
 }
