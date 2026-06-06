@@ -641,12 +641,19 @@ input {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   color: var(--navy);
-  border-radius: 8px;
-  background: var(--teal);
-  font-weight: 950;
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  background: var(--mint);
+  overflow: hidden;
+}
+
+.chatbot__toggle-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .chatbot__panel {
