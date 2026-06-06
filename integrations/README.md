@@ -1,6 +1,6 @@
 # WhatsApp Integration
 
-This folder keeps the WhatsApp Business Platform setup separate from the static website.
+This folder keeps server-side messaging and chat setup separate from the static website.
 
 ## Market Variables
 
@@ -36,3 +36,17 @@ Do not put Meta access tokens in `whatsapp.config.js`.
 - Exposes a reusable `sendWhatsAppText` helper for session replies.
 
 Outbound promotional or template messages should remain disabled until opt-in, templates, legal identity, and market readiness are approved.
+
+## Website Chatbot
+
+Use `chatbot.env.example` for the deployment variables and `chatbot-api.example.js` as the server-side shape.
+
+The chatbot API:
+
+- Receives website chat messages at `/api/chat`.
+- Routes by market: `us`, `spain`, or `uae`.
+- Forwards the normalized event to `CHAT_AGENT_WEBHOOK_URL` when configured.
+- Adds guardrails for no outbound messaging and permission-first handling.
+- Returns a fallback reply when the real agent webhook is not configured.
+
+The static website reads `../chatbot.config.js`. Put only public values there. Keep agent URLs, tokens, and provider credentials in the backend environment.

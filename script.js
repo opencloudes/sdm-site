@@ -10,6 +10,11 @@ const formatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
+const chatState = {
+  conversationId: `sdm-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+  isSending: false
+};
+
 function cleanWhatsAppNumber(phoneNumber) {
   return String(phoneNumber || "").replace(/[^\d]/g, "");
 }
@@ -101,6 +106,117 @@ function renderWhatsAppMarkets() {
   }).join("");
 }
 
+function appendChatMessage(container, role, text) {
+  const message = document.createElement("div");
+  message.className = `chatbot-message chatbot-message--${role}`;
+  message.textContent = text;
+  container.appendChild(message);
+  container.scrollTop = container.scrollHeight;
+}
+
+function buildDemoChatReply(message, intent, marketLabel) {
+  const config = window.SDM_CHATBOT_CONFIG || {};
+  const guidance = config.quickReplies?.[intent] || config.quickReplies?.["agent-audit"];
+  const trimmed = message.trim();
+
+  if (trimmed.length < 18) {
+    return `${guidance} You can start with one sentence about the business and the workflow.`;
+  }
+
+  return `For ${marketLabel}, I would start by mapping the current workflow, identifying the handoff delay, and estimating value before building the agent. ${guidance}`;
+}
+
+async function sendChatMessage(payload) {
+  const config = window.SDM_CHATBOT_CONFIG || {};
+  if (!config.apiEndpoint || config.demoMode) {
+    return {
+      reply: buildDemoChatReply(payload.message, payload.intent, payload.marketLabel),
+      mode: "demo"
+    };
+  }
+
+  const response = await fetch(config.apiEndpoint, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Chat request failed: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function setupChatbot() {
+  const root = document.querySelector("[data-chatbot]");
+  const config = window.SDM_CHATBOT_CONFIG;
+  if (!root || !config?.enabled) {
+    root?.remove();
+    return;
+  }
+
+  const toggle = root.querySelector("[data-chat-toggle]");
+  const close = root.querySelector("[data-chat-close]");
+  const panel = root.querySelector("[data-chat-panel]");
+  const form = root.querySelector("[data-chat-form]");
+  const input = root.querySelector("[data-chat-input]");
+  const messages = root.querySelector("[data-chat-messages]");
+  const marketSelect = root.querySelector("[data-chat-market]");
+  const intentSelect = root.querySelector("[data-chat-intent]");
+  const status = root.querySelector("[data-chat-status]");
+
+  status.textContent = config.apiEndpoint && !config.demoMode ? "Live agent endpoint" : "Demo mode";
+  marketSelect.innerHTML = config.markets.map((market) => `<option value="${market.id}">${market.label}</option>`).join("");
+  appendChatMessage(messages, "assistant", config.initialMessage);
+
+  function setOpen(isOpen) {
+    panel.hidden = !isOpen;
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    if (isOpen) input.focus();
+  }
+
+  toggle.addEventListener("click", () => setOpen(panel.hidden));
+  close.addEventListener("click", () => setOpen(false));
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (chatState.isSending) return;
+
+    const message = input.value.trim();
+    if (!message) return;
+
+    const market = config.markets.find((entry) => entry.id === marketSelect.value) || config.markets[0];
+    const intent = intentSelect.value;
+    appendChatMessage(messages, "user", message);
+    input.value = "";
+    chatState.isSending = true;
+    form.querySelector("button").disabled = true;
+
+    try {
+      const payload = {
+        source: "website-chat",
+        conversationId: chatState.conversationId,
+        marketId: market.id,
+        marketLabel: market.label,
+        legalEntity: market.legalEntity,
+        intent,
+        message,
+        page: window.location.pathname,
+        sentAt: new Date().toISOString()
+      };
+      const result = await sendChatMessage(payload);
+      appendChatMessage(messages, "assistant", result.reply || "Thanks. I captured this and can route it to the SmartDigitalMinds team.");
+    } catch (error) {
+      appendChatMessage(messages, "assistant", "I could not reach the chat endpoint. Please email luis.ramirez@opencloud.es with the workflow and market.");
+    } finally {
+      chatState.isSending = false;
+      form.querySelector("button").disabled = false;
+      input.focus();
+    }
+  });
+}
+
 document.querySelector(".focus-strip")?.addEventListener("click", updateFocus);
 
 document.querySelectorAll("[data-calculator]").forEach((form) => {
@@ -109,3 +225,4 @@ document.querySelectorAll("[data-calculator]").forEach((form) => {
 });
 
 renderWhatsAppMarkets();
+setupChatbot();

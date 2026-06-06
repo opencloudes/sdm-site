@@ -11,7 +11,7 @@
   <body>
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="SmartDigitalMinds home">
-        <img src="assets/smd.png" alt="SmartDigitalMinds">
+        <img src="assets/sdm.png" alt="SmartDigitalMinds">
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="#agents">Agents</a>
@@ -33,7 +33,7 @@
             follow-up, reporting, and consistency create measurable business value.
           </p>
           <div class="hero__actions" aria-label="Primary actions">
-            <a class="button button--primary" href="mailto:agents@smartdigitalminds.com?subject=SmartDigitalMinds%20agent%20audit">Request an agent audit</a>
+            <a class="button button--primary" href="mailto:agent@smartdigitalminds.com?subject=SmartDigitalMinds%20agent%20audit">Request an agent audit</a>
             <a class="button button--ghost" href="#value">Estimate value</a>
           </div>
           <div class="focus-strip" aria-label="Agent focus selector">
@@ -229,12 +229,50 @@
             <h2 id="contact-title">Pick one workflow and make its value obvious.</h2>
           </div>
           <div class="contact__actions">
-            <a class="button button--primary" href="mailto:agents@smartdigitalminds.com?subject=SmartDigitalMinds%20agent%20audit">agents@smartdigitalminds.com</a>
+            <a class="button button--primary" href="mailto:agent@smartdigitalminds.com?subject=SmartDigitalMinds%20agent%20audit">agent@smartdigitalminds.com</a>
             <p>Send the workflow, current tool stack, and where the delay or missed value appears.</p>
           </div>
         </div>
       </section>
     </main>
+
+    <section class="chatbot" data-chatbot aria-label="SmartDigitalMinds chat assistant">
+      <button class="chatbot__toggle" type="button" data-chat-toggle aria-expanded="false" aria-controls="chatbot-panel">
+        <span class="chatbot__toggle-icon" aria-hidden="true">?</span>
+        <span>Agent chat</span>
+      </button>
+      <div class="chatbot__panel" id="chatbot-panel" data-chat-panel hidden>
+        <div class="chatbot__header">
+          <div>
+            <strong>SmartDigitalMinds Assistant</strong>
+            <span data-chat-status>Demo mode</span>
+          </div>
+          <button class="chatbot__close" type="button" data-chat-close aria-label="Close chat">x</button>
+        </div>
+        <div class="chatbot__controls">
+          <label>
+            <span>Market</span>
+            <select data-chat-market aria-label="Select market"></select>
+          </label>
+          <label>
+            <span>Need</span>
+            <select data-chat-intent aria-label="Select topic">
+              <option value="agent-audit">Agent audit</option>
+              <option value="lead-followup">Lead follow-up</option>
+              <option value="operations">Operations automation</option>
+              <option value="whatsapp">WhatsApp integration</option>
+            </select>
+          </label>
+        </div>
+        <div class="chatbot__messages" data-chat-messages aria-live="polite"></div>
+        <form class="chatbot__form" data-chat-form>
+          <label class="sr-only" for="chatbot-message">Message</label>
+          <textarea id="chatbot-message" data-chat-input rows="2" placeholder="Tell us the workflow you want to improve"></textarea>
+          <button class="button button--primary" type="submit">Send</button>
+        </form>
+        <p class="chatbot__note">No outreach or WhatsApp message is sent from this chat unless a live backend is configured.</p>
+      </div>
+    </section>
 
     <footer class="site-footer">
       <div class="site-footer__inner">
@@ -244,6 +282,7 @@
     </footer>
 
     <script src="whatsapp.config.js"></script>
+    <script src="chatbot.config.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

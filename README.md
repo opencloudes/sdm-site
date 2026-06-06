@@ -1,20 +1,52 @@
-# SmartDigitalMinds Website
+# WhatsApp Integration
 
-Static first-pass website for SmartDigitalMinds.
+This folder keeps server-side messaging and chat setup separate from the static website.
 
-## Files
+## Market Variables
 
-- `index.html`: homepage structure and copy.
-- `styles.css`: responsive visual system based on the logo palette.
-- `script.js`: focus selector and value calculator interactions.
-- `whatsapp.config.js`: public WhatsApp market variables for US, Spain/Europe, and UAE.
-- `assets/`: logo, icon, and generated hero image.
-- `integrations/`: server-side WhatsApp webhook and environment examples.
+Use `whatsapp.env.example` as the deployment template. Each market has its own:
 
-Open `index.html` in a browser to view the site.
+- WhatsApp Business Account ID
+- Phone number ID
+- Public E.164 phone number
+- Template prefix
 
-## WhatsApp
+Markets currently prepared:
 
-The page is ready for three markets but does not expose any live number until `phoneNumberE164` is filled in `whatsapp.config.js`.
+- `US`
+- `Spain / Europe`
+- `UAE`
 
-Keep Meta access tokens, webhook verify tokens, WhatsApp Business Account IDs, and phone number IDs in the backend deployment environment. Use `integrations/whatsapp.env.example` as the template.
+## Website Variables
+
+The static website reads `../whatsapp.config.js`.
+
+Fill `phoneNumberE164` when a market number is ready. Until then, the page shows that the market is pending instead of linking to WhatsApp.
+
+Do not put Meta access tokens in `whatsapp.config.js`.
+
+## Backend Webhook
+
+`whatsapp-webhook.example.js` shows the server-side shape:
+
+- Verifies Meta's webhook challenge.
+- Receives WhatsApp messages.
+- Routes the event to the right market by `phone_number_id`.
+- Forwards normalized events to `AGENT_WEBHOOK_URL`.
+- Exposes a reusable `sendWhatsAppText` helper for session replies.
+
+Outbound promotional or template messages should remain disabled until opt-in, templates, legal identity, and market readiness are approved.
+
+## Website Chatbot
+
+Use `chatbot.env.example` for the deployment variables and `chatbot-api.example.js` as the server-side shape.
+
+The chatbot API:
+
+- Receives website chat messages at `/api/chat`.
+- Routes by market: `us`, `spain`, or `uae`.
+- Forwards the normalized event to `CHAT_AGENT_WEBHOOK_URL` when configured.
+- Adds guardrails for no outbound messaging and permission-first handling.
+- Returns a fallback reply when the real agent webhook is not configured.
+
+The static website reads `../chatbot.config.js`. Put only public values there. Keep agent URLs, tokens, and provider credentials in the backend environment.
