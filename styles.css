@@ -66,6 +66,15 @@ input {
   min-width: 220px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
 .site-nav {
   display: flex;
   align-items: center;
@@ -85,6 +94,31 @@ input {
 
 .site-nav a:hover {
   background: var(--mint);
+}
+
+.language-switcher {
+  display: block;
+}
+
+.language-select {
+  min-height: 40px;
+  min-width: 142px;
+  padding: 8px 34px 8px 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.language-select:hover,
+.language-select:focus {
+  color: var(--navy);
+  border-color: rgba(25, 215, 194, 0.72);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(25, 215, 194, 0.18);
 }
 
 .hero {
@@ -809,6 +843,10 @@ input {
     padding: 12px 24px;
   }
 
+  .header-actions {
+    justify-content: flex-start;
+  }
+
   .brand {
     width: 250px;
   }
@@ -879,7 +917,7 @@ input {
   }
 
   .hero h1 {
-    font-size: 2.65rem;
+    font-size: 1.85rem;
     overflow-wrap: anywhere;
   }
 
