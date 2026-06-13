@@ -1541,7 +1541,11 @@ function renderInlineMarkdown(value) {
         .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
         .replace(/__([^_]+)__/g, "<strong>$1</strong>")
         .replace(/(^|[\s(])\*([^*\n]+)\*/g, "$1<em>$2</em>")
-        .replace(/(^|[\s(])_([^_\n]+)_/g, "$1<em>$2</em>");
+        .replace(/(^|[\s(])_([^_\n]+)_/g, "$1<em>$2</em>")
+        .replace(
+          /\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})\b/gi,
+          '<a href="mailto:$1">$1</a>'
+        );
     }).join("");
   }
 
@@ -1712,8 +1716,89 @@ function normalizeInlineMarkdownTables(value) {
     .join("\n");
 }
 
+function getInlineOrderedListMarkers(line) {
+  const markers = [];
+  const markerPattern = /(^|\s)(\d{1,2})\.\s+(?=\S)/g;
+  let match;
+
+  while ((match = markerPattern.exec(line)) !== null) {
+    markers.push({
+      number: Number(match[2]),
+      start: match.index + match[1].length,
+      contentStart: match.index + match[0].length
+    });
+  }
+
+  return markers;
+}
+
+function splitInlineOrderedListTail(content) {
+  const tailPattern = /([?!.])\s+(?=(Con esta información|Si prefieres|Puedes|Gracias|Quedo|¡Quedo|Espero|Cuando tengas|Envíame|Comparte|With this information|If you prefer|You can|Thanks|Once you have|Please share)\b)/u;
+  const match = content.match(tailPattern);
+  if (!match || typeof match.index !== "number") {
+    return { item: content, suffix: "" };
+  }
+
+  const itemEnd = match.index + match[1].length;
+  return {
+    item: content.slice(0, itemEnd).trim(),
+    suffix: content.slice(itemEnd).trim()
+  };
+}
+
+function normalizeInlineOrderedListLine(line) {
+  const markers = getInlineOrderedListMarkers(line);
+  const firstMarkerIndex = markers.findIndex((marker, index) => {
+    return marker.number === 1 && markers[index + 1]?.number === 2;
+  });
+
+  if (firstMarkerIndex === -1) return line;
+
+  const listMarkers = [];
+  let expectedNumber = 1;
+
+  for (let index = firstMarkerIndex; index < markers.length; index += 1) {
+    if (markers[index].number !== expectedNumber) break;
+    listMarkers.push(markers[index]);
+    expectedNumber += 1;
+  }
+
+  if (listMarkers.length < 2) return line;
+
+  const prefix = line.slice(0, listMarkers[0].start).trimEnd();
+  const listLines = [];
+  let suffix = "";
+
+  listMarkers.forEach((marker, index) => {
+    const nextMarker = listMarkers[index + 1];
+    const itemEnd = nextMarker ? nextMarker.start : line.length;
+    let item = line.slice(marker.contentStart, itemEnd).trim();
+
+    if (!nextMarker) {
+      const splitTail = splitInlineOrderedListTail(item);
+      item = splitTail.item;
+      suffix = splitTail.suffix;
+    }
+
+    listLines.push(`${marker.number}. ${item}`);
+  });
+
+  return [prefix, listLines.join("\n"), suffix].filter(Boolean).join("\n\n");
+}
+
+function normalizeInlineOrderedLists(value) {
+  return String(value)
+    .split("\n")
+    .map(normalizeInlineOrderedListLine)
+    .join("\n");
+}
+
+function normalizeCompressedMarkdown(value) {
+  return normalizeInlineOrderedLists(normalizeInlineMarkdownTables(value));
+}
+
 function renderMarkdown(value) {
-  const lines = normalizeInlineMarkdownTables(value).split("\n");
+  const lines = normalizeCompressedMarkdown(value).split("\n");
   const html = [];
   let paragraph = [];
   let listType = "";

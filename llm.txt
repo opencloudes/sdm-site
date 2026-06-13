@@ -1,0 +1,46 @@
+# SmartDigitalMinds
+
+SmartDigitalMinds builds and runs practical AI agents for business workflows where speed, follow-up, reporting, and consistency create measurable value.
+
+## Services
+
+- Agent audits: Review a business workflow, current tools, weekly volume, handoff points, delays, and value opportunities before recommending an AI agent implementation.
+- Lead intake agents: Capture website forms, missed calls, quote requests, new inquiries, and handoffs before leads go cold.
+- Follow-up agents: Send timely next-step reminders, review requests, status updates, and lead follow-up messages based on clear business rules.
+- Back-office agents: Reduce repeated administrative work across scheduling, data cleanup, summaries, routing, approvals, and internal requests.
+- Reporting agents: Turn daily activity into weekly numbers, alerts, management views, and practical recommendations.
+- Operations automation: Map repetitive workflows, connect data and tools, define escalation paths, and monitor outcomes after launch.
+- WhatsApp integration: Support inbound, permission-first WhatsApp audit requests and prepare agent-assisted replies, handoffs, templates, and reporting when the business channel is approved.
+- AI governance and readiness scoping: Help identify workflow, tool, data, volume, pain-point, market, and timeline requirements for structured AI implementations, including ISO 42001-oriented discovery when relevant.
+
+## Operating Model
+
+SmartDigitalMinds starts with the business case. A useful agent should reduce operating drag, recover revenue, improve response time, or make management reporting clearer.
+
+The delivery model is:
+
+1. Map the workflow, data, decision points, and owner.
+2. Build the agent behavior, integrations, messages, and reporting.
+3. Run the system with monitoring, quality checks, and escalation paths.
+4. Improve the agent based on measured value and real usage.
+
+## Best-Fit Workflows
+
+- Local service intake
+- Quote follow-up
+- Review requests
+- Appointment reminders
+- Weekly management reports
+- Internal task routing
+- CRM or ERP workflow support
+- AI agent readiness and governance discovery
+
+## Markets
+
+SmartDigitalMinds supports business agent workflows for the United States, Spain and Europe, and UAE-focused planning when the legal and channel requirements are ready.
+
+## Contact
+
+Primary contact: agents@smartdigitalminds.com
+
+When requesting help, include the workflow, current tool stack, approximate volume, market, timeline, and where the delay or missed value appears.
