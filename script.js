@@ -1,5 +1,5 @@
 const LANGUAGE_STORAGE_KEY = "sdm-language";
-const supportedLanguages = ["en", "es", "fr", "de", "it"];
+const supportedLanguages = ["en", "es", "pt", "fr", "de", "it"];
 const regionLanguageMap = {
   AT: "de",
   CH: "de",
@@ -9,6 +9,7 @@ const regionLanguageMap = {
   IT: "it",
   LI: "de",
   MC: "fr",
+  PT: "pt",
   SM: "it",
   VA: "it"
 };
@@ -20,6 +21,9 @@ const timezoneLanguageMap = {
   "Africa/Ceuta": "es",
   "Europe/Paris": "fr",
   "Europe/Monaco": "fr",
+  "Europe/Lisbon": "pt",
+  "Atlantic/Azores": "pt",
+  "Atlantic/Madeira": "pt",
   "Europe/Rome": "it",
   "Europe/San_Marino": "it",
   "Europe/Vatican": "it",
@@ -450,6 +454,218 @@ const translations = {
         complianceNote: "Mantener desactivado el envío saliente hasta que la entidad, dirección, número y consentimiento de EAU estén listos."
       },
       pendingUaeEntity: "Entidad de EAU pendiente"
+    }
+  },
+  pt: {
+    locale: "pt-PT",
+    htmlLang: "pt-PT",
+    meta: {
+      title: "SmartDigitalMinds | Operações com agentes para empresas",
+      description: "A SmartDigitalMinds desenha e gere agentes de IA que apoiam as operações de negócio, melhoram a automatização e se concentram em valor mensurável."
+    },
+    language: {
+      selectorAria: "Seletor de idioma"
+    },
+    brand: {
+      home: "Início da SmartDigitalMinds"
+    },
+    nav: {
+      aria: "Navegação principal",
+      agents: "Agentes",
+      run: "Modelo operativo",
+      whatsapp: "WhatsApp",
+      value: "Valor",
+      contact: "Contacto"
+    },
+    hero: {
+      eyebrow: "Operações com agentes para empresas",
+      lead: "Desenhamos e gerimos agentes de IA práticos para os processos em que a rapidez, o seguimento, os relatórios e a consistência geram valor empresarial mensurável.",
+      primaryCta: "Solicitar uma auditoria de agentes",
+      secondaryCta: "Estimar valor",
+      actionsAria: "Ações principais"
+    },
+    focus: {
+      selectorAria: "Seletor de foco do agente",
+      tabsAria: "Foco do agente",
+      tabs: {
+        leads: "Resposta a contactos",
+        ops: "Operações",
+        insight: "Visão de gestão"
+      },
+      messages: {
+        leads: "Primeiro resultado: reduzir o atraso em chamadas perdidas e recuperar consultas que normalmente se perdem.",
+        ops: "Primeiro resultado: eliminar tarefas administrativas repetidas e dar à equipa uma via clara de escalamento.",
+        insight: "Primeiro resultado: transformar a atividade diária numa vista semanal de decisões para responsáveis."
+      }
+    },
+    intro: {
+      eyebrow: "Construídos para gerar valor, não novidade",
+      title: "Agentes que encaixam na forma como a empresa já trabalha.",
+      cards: [
+        {
+          title: "Encontrar o ponto fraco do processo",
+          body: "Começamos onde os atrasos, o trabalho duplicado, o seguimento perdido e a falta de responsável custam dinheiro."
+        },
+        {
+          title: "Construir o sistema de agentes",
+          body: "Os agentes ligam a entrada, os dados, as mensagens, as aprovações e os relatórios que precisam de consistência."
+        },
+        {
+          title: "Gerir e melhorar",
+          body: "Mantemos o sistema supervisionado, medido e ajustado à medida que a utilização real mostra onde se cria valor."
+        }
+      ]
+    },
+    agents: {
+      eyebrow: "O que construímos",
+      title: "Agentes empresariais para o trabalho entre o cliente, a equipa e os números.",
+      cards: [
+        {
+          title: "Agentes de entrada de contactos",
+          body: "Captam novas consultas, chamadas perdidas, pedidos de orçamento, formulários web e encaminhamentos antes de arrefecerem."
+        },
+        {
+          title: "Agentes de seguimento",
+          body: "Enviam lembretes, pedidos de avaliação, atualizações de estado e mensagens sobre o passo seguinte com regras claras."
+        },
+        {
+          title: "Agentes de administração interna",
+          body: "Reduzem tarefas administrativas repetidas em agenda, limpeza de dados, resumos, atribuição e pedidos internos."
+        },
+        {
+          title: "Agentes de relatórios",
+          body: "Transformam a atividade em números semanais, alertas e recomendações práticas para responsáveis e proprietários."
+        }
+      ]
+    },
+    run: {
+      eyebrow: "Construir e gerir",
+      title: "O agente só é útil quando continua a funcionar depois do lançamento.",
+      body: "A SmartDigitalMinds trata os agentes como uma camada operativa. Definimos o processo, construímos a automatização, supervisionamos resultados e refinamos o sistema face ao valor que deve produzir.",
+      steps: [
+        {
+          label: "Mapear",
+          body: "Processo, dados, decisões e responsável."
+        },
+        {
+          label: "Construir",
+          body: "Comportamento do agente, integrações, mensagens e relatórios."
+        },
+        {
+          label: "Gerir",
+          body: "Supervisão, controlos de qualidade e vias de escalamento."
+        },
+        {
+          label: "Melhorar",
+          body: "Medir o valor, eliminar fricção e ampliar apenas onde compense."
+        }
+      ]
+    },
+    calculator: {
+      eyebrow: "Calculadora de valor",
+      title: "Comece pelo caso de negócio.",
+      body: "Um agente útil deve reduzir fricção operacional ou recuperar receita. Esta estimativa rápida enquadra o primeiro objetivo.",
+      hours: "Horas poupadas por semana",
+      rate: "Valor empresarial por hora",
+      leads: "Contactos recuperados por mês",
+      leadValue: "Valor médio por contacto",
+      result: "Valor mensal estimado"
+    },
+    whatsapp: {
+      eyebrow: "Integração com WhatsApp",
+      title: "Uma camada de agentes, três canais comerciais.",
+      body: "O WhatsApp pode receber pedidos de auditoria desde já e, mais tarde, ligar-se à plataforma Business da Meta para respostas assistidas por agentes, modelos, encaminhamentos e relatórios. Os números e IDs de conta são geridos pela configuração, por isso a página fica pronta antes de os canais estarem ativos.",
+      loadingStatus: "A carregar mercados",
+      loadingTitle: "Canais de WhatsApp",
+      loadingBody: "A configuração do mercado está a carregar.",
+      flowAria: "Fluxo do agente de WhatsApp",
+      flow: ["Consentimento de entrada", "Atribuição por mercado", "Classificação do agente", "Encaminhamento para uma pessoa", "Relatório de valor"],
+      defaultMessage: "Olá SmartDigitalMinds, quero uma auditoria de agentes para o meu negócio.",
+      statusReady: "Pronto para WhatsApp de entrada",
+      statusPending: "Número pendente",
+      phonePending: "Configurado em whatsapp.config.js",
+      accountPending: "ID de conta pendente",
+      phoneIdPending: "ID de número pendente",
+      detailsBusiness: "Empresa",
+      detailsNumber: "Número de WhatsApp",
+      detailsAccount: "Conta empresarial",
+      detailsPhoneId: "ID do número",
+      openAction: "Abrir WhatsApp",
+      waitingAction: "À espera do número"
+    },
+    sectors: {
+      eyebrow: "Por onde começar",
+      title: "Os bons primeiros processos são visíveis, repetitivos e mensuráveis.",
+      items: [
+        "Entrada de serviços locais",
+        "Seguimento de orçamentos",
+        "Pedidos de avaliações",
+        "Lembretes de marcações",
+        "Relatórios semanais de gestão",
+        "Atribuição interna de tarefas"
+      ]
+    },
+    contact: {
+      eyebrow: "Próximo passo",
+      title: "Escolha um processo e torne evidente o seu valor.",
+      body: "Envie o processo, as ferramentas atuais e onde aparece o atraso ou o valor perdido."
+    },
+    chat: {
+      rootAria: "Assistente de chat da SmartDigitalMinds",
+      toggle: "Chat de agente",
+      assistantName: "Assistente SmartDigitalMinds",
+      statusDemo: "Modo demo",
+      statusLive: "Ponto de ligação do agente ativo",
+      closeAria: "Fechar chat",
+      market: "Mercado",
+      marketAria: "Selecionar mercado",
+      need: "Necessidade",
+      intentAria: "Selecionar tema",
+      intents: {
+        "agent-audit": "Auditoria de agentes",
+        "lead-followup": "Seguimento de contactos",
+        operations: "Automatização operativa",
+        whatsapp: "Integração com WhatsApp"
+      },
+      messageLabel: "Mensagem",
+      placeholder: "Conte-nos o processo que quer melhorar",
+      send: "Enviar",
+      note: "Nenhuma comunicação comercial ou mensagem de WhatsApp é enviada a partir deste chat salvo se for configurado um sistema ativo.",
+      initialMessage: "Olá. Posso ajudar a definir uma auditoria de agentes, um processo de seguimento de contactos, automatização operativa ou integração com WhatsApp.",
+      quickReplies: {
+        "agent-audit": "Para uma auditoria de agentes, partilhe o processo, as ferramentas atuais, o volume semanal e onde surgem os atrasos.",
+        "lead-followup": "Para seguimento de contactos, partilhe as fontes de contactos, o tempo médio de resposta, o volume de chamadas perdidas e o processo atual de encaminhamento.",
+        operations: "Para automatização operativa, partilhe a tarefa repetitiva, quem a gere, as ferramentas atuais e como se define um resultado bem-sucedido.",
+        whatsapp: "Para WhatsApp, partilhe o mercado, a fonte de consentimento, os tipos de mensagens previstos e se o número da empresa já está aprovado."
+      },
+      shortPromptSuffix: "Pode começar com uma frase sobre a empresa e o processo.",
+      longPrompt: "Para {marketLabel}, começaria por analisar o processo atual, identificar o atraso no encaminhamento e estimar o valor antes de construir o agente. {guidance}",
+      captured: "Obrigado. Registei isto e posso encaminhá-lo para a equipa da SmartDigitalMinds.",
+      endpointError: "Não consegui contactar o ponto de ligação do chat. Escreva para luis.ramirez@opencloud.es com o processo e o mercado."
+    },
+    footer: {
+      body: "A SmartDigitalMinds desenha e gere agentes empresariais centrados no valor da automatização."
+    },
+    mail: {
+      auditSubject: "Auditoria de agentes da SmartDigitalMinds"
+    },
+    markets: {
+      us: {
+        label: "Estados Unidos",
+        whatsappMessage: "Olá SmartDigitalMinds, quero uma auditoria de agentes para um negócio nos Estados Unidos.",
+        complianceNote: "Ativar apenas depois de aprovar o número de WhatsApp dos EUA e a via de consentimento."
+      },
+      spain: {
+        label: "Espanha / Europa",
+        whatsappMessage: "Olá SmartDigitalMinds, quero uma auditoria de agentes para o meu negócio.",
+        complianceNote: "Usar WhatsApp de entrada com permissão prévia, QR ou consentimento explícito no site."
+      },
+      uae: {
+        label: "EAU",
+        whatsappMessage: "Olá SmartDigitalMinds, quero uma auditoria de agentes para um negócio nos EAU.",
+        complianceNote: "Manter o envio de saída desativado até que entidade, morada, número e consentimento dos EAU estejam prontos."
+      },
+      pendingUaeEntity: "Entidade dos EAU pendente"
     }
   },
   fr: {

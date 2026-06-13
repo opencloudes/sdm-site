@@ -1,7 +1,7 @@
 window.SDM_CHATBOT_CONFIG = {
   enabled: true,
-  apiEndpoint: "",
-  demoMode: true,
+  apiEndpoint: window.SDM_CHATBOT_API_ENDPOINT || "/api/chat",
+  demoMode: false,
   handoffEmail: "luis.ramirez@opencloud.es",
   assistantName: "SmartDigitalMinds Assistant",
   initialMessage: "Hi. I can help scope an agent audit, lead follow-up workflow, operations automation, or WhatsApp integration.",

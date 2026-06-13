@@ -1,0 +1,8 @@
+services:
+  sdm-chatbot:
+    build: .
+    env_file:
+      - chatbot.env
+    ports:
+      - "8790:8790"
+    restart: unless-stopped

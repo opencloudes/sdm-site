@@ -39,13 +39,13 @@ Outbound promotional or template messages should remain disabled until opt-in, t
 
 ## Website Chatbot
 
-Use `chatbot.env.example` for the deployment variables and `chatbot-api.example.js` as the server-side shape.
+Use `../../backend/chatbot` for the deployable Go backend and Docker container. `chatbot-api.example.js` remains only as a lightweight reference for the original request shape.
 
 The chatbot API:
 
 - Receives website chat messages at `/api/chat`.
 - Routes by market: `us`, `spain`, or `uae`.
-- Forwards the normalized event to `CHAT_AGENT_WEBHOOK_URL` when configured.
+- Forwards the normalized event to `OPENCLAW_AGENT_URL` or `CHAT_AGENT_WEBHOOK_URL` when configured.
 - Adds guardrails for no outbound messaging and permission-first handling.
 - Returns a fallback reply when the real agent webhook is not configured.
 
