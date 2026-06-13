@@ -3,7 +3,7 @@ import http from "node:http";
 const PORT = Number(process.env.PORT || 8790);
 const ALLOWED_ORIGIN = process.env.CHAT_ALLOWED_ORIGIN || "*";
 const AGENT_WEBHOOK_URL = process.env.CHAT_AGENT_WEBHOOK_URL || "";
-const FALLBACK_EMAIL = process.env.CHAT_FALLBACK_EMAIL || "luis.ramirez@opencloud.es";
+const FALLBACK_EMAIL = process.env.CHAT_FALLBACK_EMAIL || "agents@smartdigitalminds.com";
 const DEMO_FALLBACK = process.env.CHAT_DEMO_FALLBACK !== "false";
 
 const markets = {

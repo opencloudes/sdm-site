@@ -50,3 +50,15 @@ The chatbot API:
 - Returns a fallback reply when the real agent webhook is not configured.
 
 The static website reads `chatbot.config.js`. Put only public values there. Keep agent URLs, tokens, and provider credentials in the backend container environment.
+
+
+# Tooling necesario
+
+- HaProxy
+- Podman:
+    - podman build -t sdm:v1.0.1 .
+    - podman run -d --name sdm-site -p 8080:80 sdm:v1.0.1
+- Ollama GPT-OSS:20b
+    - curl -fsSL https://ollama.com/install.sh | sh
+    - ollama pull gpt-oss:20b
+- Build the backend

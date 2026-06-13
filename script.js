@@ -200,8 +200,9 @@ const translations = {
       intents: {
         "agent-audit": "Agent audit",
         "lead-followup": "Lead follow-up",
-        operations: "Operations automation",
-        whatsapp: "WhatsApp integration"
+        "operations": "Operations automation",
+        "whatsapp": "WhatsApp integration",
+        "other": "For Other, please share the information about your process, workflow, and contact details."
       },
       messageLabel: "Message",
       placeholder: "Tell us the workflow you want to improve",
@@ -211,13 +212,14 @@ const translations = {
       quickReplies: {
         "agent-audit": "For an agent audit, please share the workflow, current tools, volume per week, and where delays appear.",
         "lead-followup": "For lead follow-up, please share lead sources, average response time, missed-call volume, and current handoff process.",
-        operations: "For operations automation, please share the repetitive task, who owns it, current tools, and what a successful result looks like.",
-        whatsapp: "For WhatsApp, please share the market, opt-in source, expected message types, and whether the business number is already approved."
+        "operations": "For operations automation, please share the repetitive task, who owns it, current tools, and what a successful result looks like.",
+        "whatsapp": "For WhatsApp, please share the market, opt-in source, expected message types, and whether the business number is already approved.",
+        "other": "For Other, please share the information about your process, workflow, and contact details."
       },
       shortPromptSuffix: "You can start with one sentence about the business and the workflow.",
       longPrompt: "For {marketLabel}, I would start by mapping the current workflow, identifying the handoff delay, and estimating value before building the agent. {guidance}",
       captured: "Thanks. I captured this and can route it to the SmartDigitalMinds team.",
-      endpointError: "I could not reach the chat endpoint. Please email luis.ramirez@opencloud.es with the workflow and market."
+      endpointError: "I could not reach a free agent now. Please retry or send an email to agents@smartdigitalminds.com with the workflow and market."
     },
     footer: {
       body: "SmartDigitalMinds builds and runs business agents focused on automation value."
@@ -232,7 +234,7 @@ const translations = {
         complianceNote: "Activate only after the US WhatsApp number and opt-in path are approved."
       },
       spain: {
-        label: "Spain / Europe",
+        label: "Europe",
         whatsappMessage: "Hola SmartDigitalMinds, quiero una auditoría de agentes para mi negocio.",
         complianceNote: "Use permission-first inbound WhatsApp, QR, or explicit website opt-in."
       },
@@ -429,7 +431,7 @@ const translations = {
       shortPromptSuffix: "Puedes empezar con una frase sobre la empresa y el proceso.",
       longPrompt: "Para {marketLabel}, empezaría analizando el proceso actual, identificando el retraso en la derivación y estimando el valor antes de construir el agente. {guidance}",
       captured: "Gracias. He capturado esto y puedo dirigirlo al equipo de SmartDigitalMinds.",
-      endpointError: "No he podido contactar con el punto de conexión del chat. Escribe a luis.ramirez@opencloud.es con el proceso y el mercado."
+      endpointError: "No he podido contactar con ningu agente. Reintentalo mas tarde o escribe a agents@smartdigitalminds.com con el proceso y el mercado."
     },
     footer: {
       body: "SmartDigitalMinds diseña y gestiona agentes empresariales centrados en el valor de la automatización."
@@ -641,7 +643,7 @@ const translations = {
       shortPromptSuffix: "Pode começar com uma frase sobre a empresa e o processo.",
       longPrompt: "Para {marketLabel}, começaria por analisar o processo atual, identificar o atraso no encaminhamento e estimar o valor antes de construir o agente. {guidance}",
       captured: "Obrigado. Registei isto e posso encaminhá-lo para a equipa da SmartDigitalMinds.",
-      endpointError: "Não consegui contactar o ponto de ligação do chat. Escreva para luis.ramirez@opencloud.es com o processo e o mercado."
+      endpointError: "Não consegui contactar o ponto de ligação do chat. Escreva para agents@smartdigitalminds.com com o processo e o mercado."
     },
     footer: {
       body: "A SmartDigitalMinds desenha e gere agentes empresariais centrados no valor da automatização."
@@ -853,7 +855,7 @@ const translations = {
       shortPromptSuffix: "Vous pouvez commencer par une phrase sur l'entreprise et le flux de travail.",
       longPrompt: "Pour {marketLabel}, je commencerais par cartographier le flux actuel, repérer le délai de transfert et estimer la valeur avant de construire l'agent. {guidance}",
       captured: "Merci. J'ai capturé ces informations et je peux les transmettre à l'équipe SmartDigitalMinds.",
-      endpointError: "Je n'ai pas pu joindre l'endpoint du chat. Veuillez écrire à luis.ramirez@opencloud.es avec le flux de travail et le marché."
+      endpointError: "Je n'ai pas pu joindre l'endpoint du chat. Veuillez écrire à agents@smartdigitalminds.com avec le flux de travail et le marché."
     },
     footer: {
       body: "SmartDigitalMinds conçoit et exploite des agents métier centrés sur la valeur de l'automatisation."
@@ -1065,7 +1067,7 @@ const translations = {
       shortPromptSuffix: "Sie können mit einem Satz zum Unternehmen und zum Ablauf beginnen.",
       longPrompt: "Für {marketLabel} würde ich zuerst den aktuellen Ablauf abbilden, die Übergabeverzögerung identifizieren und den Wert schätzen, bevor der Agent gebaut wird. {guidance}",
       captured: "Danke. Ich habe das erfasst und kann es an das SmartDigitalMinds-Team weiterleiten.",
-      endpointError: "Ich konnte den Chat-Endpunkt nicht erreichen. Bitte schreiben Sie an luis.ramirez@opencloud.es mit Ablauf und Markt."
+      endpointError: "Ich konnte den Chat-Endpunkt nicht erreichen. Bitte schreiben Sie an agents@smartdigitalminds.com mit Ablauf und Markt."
     },
     footer: {
       body: "SmartDigitalMinds entwickelt und betreibt Geschäftsagenten mit Fokus auf Automatisierungswert."
@@ -1277,7 +1279,7 @@ const translations = {
       shortPromptSuffix: "Puoi iniziare con una frase sull'azienda e sul flusso di lavoro.",
       longPrompt: "Per {marketLabel}, inizierei mappando il flusso attuale, identificando il ritardo nel passaggio e stimando il valore prima di costruire l'agente. {guidance}",
       captured: "Grazie. Ho registrato queste informazioni e posso indirizzarle al team SmartDigitalMinds.",
-      endpointError: "Non sono riuscito a raggiungere l'endpoint della chat. Scrivi a luis.ramirez@opencloud.es con il flusso di lavoro e il mercato."
+      endpointError: "Non sono riuscito a raggiungere l'endpoint della chat. Scrivi a agents@smartdigitalminds.com con il flusso di lavoro e il mercato."
     },
     footer: {
       body: "SmartDigitalMinds crea e gestisce agenti business focalizzati sul valore dell'automazione."
@@ -1514,6 +1516,152 @@ function escapeHtml(value) {
   });
 }
 
+function isSafeMarkdownUrl(value) {
+  try {
+    const url = new URL(value, window.location.href);
+    return ["http:", "https:", "mailto:"].includes(url.protocol);
+  } catch (error) {
+    return false;
+  }
+}
+
+function renderInlineMarkdown(value) {
+  const source = String(value);
+  const linkPattern = /\[([^\]\n]+)\]\(([^()\s]+)\)/g;
+  let cursor = 0;
+  const parts = [];
+
+  function renderTextSegment(segment) {
+    return segment.split(/(`[^`]+`)/g).map((part) => {
+      if (part.startsWith("`") && part.endsWith("`")) {
+        return `<code>${escapeHtml(part.slice(1, -1))}</code>`;
+      }
+
+      return escapeHtml(part)
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/__([^_]+)__/g, "<strong>$1</strong>")
+        .replace(/(^|[\s(])\*([^*\n]+)\*/g, "$1<em>$2</em>")
+        .replace(/(^|[\s(])_([^_\n]+)_/g, "$1<em>$2</em>");
+    }).join("");
+  }
+
+  source.replace(linkPattern, (match, label, url, offset) => {
+    parts.push(renderTextSegment(source.slice(cursor, offset)));
+
+    if (isSafeMarkdownUrl(url)) {
+      parts.push(
+        `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${renderTextSegment(label)}</a>`
+      );
+    } else {
+      parts.push(renderTextSegment(match));
+    }
+
+    cursor = offset + match.length;
+    return match;
+  });
+
+  parts.push(renderTextSegment(source.slice(cursor)));
+  return parts.join("");
+}
+
+function renderMarkdown(value) {
+  const lines = String(value).replace(/\r\n?/g, "\n").split("\n");
+  const html = [];
+  let paragraph = [];
+  let listType = "";
+  let inCodeBlock = false;
+  let codeLines = [];
+
+  function closeParagraph() {
+    if (!paragraph.length) return;
+    html.push(`<p>${paragraph.join("<br>")}</p>`);
+    paragraph = [];
+  }
+
+  function closeList() {
+    if (!listType) return;
+    html.push(`</${listType}>`);
+    listType = "";
+  }
+
+  function openList(type) {
+    if (listType === type) return;
+    closeParagraph();
+    closeList();
+    listType = type;
+    html.push(`<${type}>`);
+  }
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("```")) {
+      if (inCodeBlock) {
+        html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        codeLines = [];
+        inCodeBlock = false;
+      } else {
+        closeParagraph();
+        closeList();
+        inCodeBlock = true;
+      }
+      return;
+    }
+
+    if (inCodeBlock) {
+      codeLines.push(line);
+      return;
+    }
+
+    if (!trimmed) {
+      closeParagraph();
+      closeList();
+      return;
+    }
+
+    const heading = trimmed.match(/^#{1,4}\s+(.+)$/);
+    if (heading) {
+      closeParagraph();
+      closeList();
+      html.push(`<h4>${renderInlineMarkdown(heading[1])}</h4>`);
+      return;
+    }
+
+    const quote = trimmed.match(/^>\s?(.+)$/);
+    if (quote) {
+      closeParagraph();
+      closeList();
+      html.push(`<blockquote>${renderInlineMarkdown(quote[1])}</blockquote>`);
+      return;
+    }
+
+    const unordered = trimmed.match(/^[-*]\s+(.+)$/);
+    if (unordered) {
+      openList("ul");
+      html.push(`<li>${renderInlineMarkdown(unordered[1])}</li>`);
+      return;
+    }
+
+    const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
+    if (ordered) {
+      openList("ol");
+      html.push(`<li>${renderInlineMarkdown(ordered[1])}</li>`);
+      return;
+    }
+
+    closeList();
+    paragraph.push(renderInlineMarkdown(trimmed));
+  });
+
+  if (inCodeBlock) {
+    html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+  }
+  closeParagraph();
+  closeList();
+
+  return html.join("") || `<p>${renderInlineMarkdown(value)}</p>`;
+}
+
 function formatCurrency(value) {
   return new Intl.NumberFormat(getCopy().locale, {
     style: "currency",
@@ -1703,7 +1851,7 @@ function renderWhatsAppMarkets() {
 function appendChatMessage(container, role, text, options = {}) {
   const message = document.createElement("div");
   message.className = `chatbot-message chatbot-message--${role}`;
-  message.textContent = text;
+  setChatMessageContent(message, role, text);
 
   if (options.initial) {
     message.dataset.initialMessage = "true";
@@ -1711,6 +1859,17 @@ function appendChatMessage(container, role, text, options = {}) {
 
   container.appendChild(message);
   container.scrollTop = container.scrollHeight;
+}
+
+function setChatMessageContent(message, role, text) {
+  if (role === "assistant") {
+    message.classList.add("chatbot-message--rich");
+    message.innerHTML = renderMarkdown(text);
+    return;
+  }
+
+  message.classList.remove("chatbot-message--rich");
+  message.textContent = text;
 }
 
 function buildDemoChatReply(message, intent, marketLabel) {
@@ -1773,7 +1932,7 @@ function syncChatbotCopy() {
   const hasUserMessages = Boolean(messages?.querySelector(".chatbot-message--user"));
 
   if (initialMessage && !hasUserMessages) {
-    initialMessage.textContent = translate("chat.initialMessage");
+    setChatMessageContent(initialMessage, "assistant", translate("chat.initialMessage"));
   }
 }
 
