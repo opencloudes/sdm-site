@@ -420,7 +420,7 @@ const translations = {
       messageLabel: "Mensaje",
       placeholder: "Cuéntanos el proceso que quieres mejorar",
       send: "Enviar",
-      note: "No se envía ninguna comunicación comercial ni mensaje de WhatsApp desde este chat salvo que se configure un sistema activo.",
+      note: "No se envía ninguna comunicación comercial ni mensaje de WhatsApp desde este chat. <!-- salvo que se configure un sistema activo. -->",
       initialMessage: "Hola. Puedo ayudar a definir una auditoría de agentes, un proceso de seguimiento de contactos, automatización operativa o integración con WhatsApp.",
       quickReplies: {
         "agent-audit": "Para una auditoría de agentes, comparte el proceso, las herramientas actuales, el volumen semanal y dónde aparecen los retrasos.",
@@ -1564,8 +1564,156 @@ function renderInlineMarkdown(value) {
   return parts.join("");
 }
 
+function splitMarkdownTableRow(line) {
+  const trimmed = String(line).trim();
+  const withoutLeadingPipe = trimmed.startsWith("|") ? trimmed.slice(1) : trimmed;
+  const withoutOuterPipes = withoutLeadingPipe.endsWith("|")
+    ? withoutLeadingPipe.slice(0, -1)
+    : withoutLeadingPipe;
+
+  return withoutOuterPipes.split("|").map((cell) => cell.trim().replace(/\\\|/g, "|"));
+}
+
+function isMarkdownTableRow(line) {
+  return String(line).includes("|") && splitMarkdownTableRow(line).length > 1;
+}
+
+function isMarkdownTableDivider(line) {
+  if (!isMarkdownTableRow(line)) return false;
+
+  return splitMarkdownTableRow(line).every((cell) => {
+    return /^:?-{3,}:?$/.test(cell.trim());
+  });
+}
+
+function getMarkdownTableAlignments(line) {
+  return splitMarkdownTableRow(line).map((cell) => {
+    const marker = cell.trim();
+    if (/^:-{3,}:$/.test(marker)) return "center";
+    if (/^-{3,}:$/.test(marker)) return "right";
+    if (/^:-{3,}$/.test(marker)) return "left";
+    return "";
+  });
+}
+
+function renderMarkdownTable(headerCells, alignmentCells, bodyRows) {
+  const columnCount = Math.max(
+    headerCells.length,
+    ...bodyRows.map((row) => row.length)
+  );
+  const alignments = alignmentCells.concat(Array(columnCount).fill("")).slice(0, columnCount);
+
+  function renderCells(cells, tagName) {
+    return Array.from({ length: columnCount }, (_, index) => {
+      const alignment = alignments[index] ? ` style="text-align: ${alignments[index]}"` : "";
+      return `<${tagName}${alignment}>${renderInlineMarkdown(cells[index] || "")}</${tagName}>`;
+    }).join("");
+  }
+
+  const body = bodyRows.length
+    ? `<tbody>${bodyRows.map((row) => `<tr>${renderCells(row, "td")}</tr>`).join("")}</tbody>`
+    : "";
+
+  return `
+    <div class="chatbot-message__table-wrap">
+      <table>
+        <thead><tr>${renderCells(headerCells, "th")}</tr></thead>
+        ${body}
+      </table>
+    </div>
+  `;
+}
+
+function findMarkdownTableRowEnd(line, start, columnCount) {
+  let pipeCount = 0;
+
+  for (let index = start; index < line.length; index += 1) {
+    if (line[index] === "|" && line[index - 1] !== "\\") {
+      pipeCount += 1;
+      if (pipeCount === columnCount + 1) {
+        return index + 1;
+      }
+    }
+  }
+
+  return -1;
+}
+
+function findInlineTableHeaderStart(line, dividerStart, columnCount) {
+  let headerStart = -1;
+
+  for (let index = 0; index < dividerStart; index += 1) {
+    if (line[index] !== "|" || line[index - 1] === "\\") continue;
+
+    const candidate = line.slice(index, dividerStart).trim();
+    if (
+      isMarkdownTableRow(candidate)
+      && !isMarkdownTableDivider(candidate)
+      && splitMarkdownTableRow(candidate).length === columnCount
+    ) {
+      headerStart = index;
+    }
+  }
+
+  return headerStart;
+}
+
+function normalizeInlineMarkdownTableLine(line) {
+  const dividerMatch = line.match(/\|\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|/);
+  if (!dividerMatch) return line;
+
+  const dividerStart = dividerMatch.index;
+  const dividerEnd = dividerStart + dividerMatch[0].length;
+  const columnCount = splitMarkdownTableRow(dividerMatch[0]).length;
+  const headerStart = findInlineTableHeaderStart(line, dividerStart, columnCount);
+  if (headerStart === -1) return line;
+
+  const headerRow = line.slice(headerStart, dividerStart).trim();
+  const dividerRow = dividerMatch[0].trim();
+  const bodyRows = [];
+  let cursor = dividerEnd;
+
+  while (cursor < line.length) {
+    while (line[cursor] === " " || line[cursor] === "\t") {
+      cursor += 1;
+    }
+
+    if (line[cursor] !== "|") break;
+
+    const rowEnd = findMarkdownTableRowEnd(line, cursor, columnCount);
+    if (rowEnd === -1) break;
+
+    const row = line.slice(cursor, rowEnd).trim();
+    if (
+      !isMarkdownTableRow(row)
+      || isMarkdownTableDivider(row)
+      || splitMarkdownTableRow(row).length !== columnCount
+    ) {
+      break;
+    }
+
+    bodyRows.push(row);
+    cursor = rowEnd;
+  }
+
+  if (!bodyRows.length) return line;
+
+  const prefix = line.slice(0, headerStart).trimEnd();
+  const suffix = line.slice(cursor).trimStart();
+  const tableBlock = [headerRow, dividerRow, ...bodyRows].join("\n");
+
+  return [prefix, tableBlock, suffix].filter(Boolean).join("\n\n");
+}
+
+function normalizeInlineMarkdownTables(value) {
+  return String(value).replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map(normalizeInlineMarkdownTableLine)
+    .join("\n");
+}
+
 function renderMarkdown(value) {
-  const lines = String(value).replace(/\r\n?/g, "\n").split("\n");
+  const lines = normalizeInlineMarkdownTables(value).split("\n");
   const html = [];
   let paragraph = [];
   let listType = "";
@@ -1592,7 +1740,8 @@ function renderMarkdown(value) {
     html.push(`<${type}>`);
   }
 
-  lines.forEach((line) => {
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
     const trimmed = line.trim();
 
     if (trimmed.startsWith("```")) {
@@ -1605,18 +1754,37 @@ function renderMarkdown(value) {
         closeList();
         inCodeBlock = true;
       }
-      return;
+      continue;
     }
 
     if (inCodeBlock) {
       codeLines.push(line);
-      return;
+      continue;
     }
 
     if (!trimmed) {
       closeParagraph();
       closeList();
-      return;
+      continue;
+    }
+
+    if (isMarkdownTableRow(trimmed) && isMarkdownTableDivider(lines[index + 1] || "")) {
+      closeParagraph();
+      closeList();
+
+      const headerCells = splitMarkdownTableRow(trimmed);
+      const alignmentCells = getMarkdownTableAlignments(lines[index + 1]);
+      const bodyRows = [];
+      index += 2;
+
+      while (index < lines.length && isMarkdownTableRow(lines[index]) && lines[index].trim()) {
+        bodyRows.push(splitMarkdownTableRow(lines[index]));
+        index += 1;
+      }
+
+      index -= 1;
+      html.push(renderMarkdownTable(headerCells, alignmentCells, bodyRows));
+      continue;
     }
 
     const heading = trimmed.match(/^#{1,4}\s+(.+)$/);
@@ -1624,7 +1792,7 @@ function renderMarkdown(value) {
       closeParagraph();
       closeList();
       html.push(`<h4>${renderInlineMarkdown(heading[1])}</h4>`);
-      return;
+      continue;
     }
 
     const quote = trimmed.match(/^>\s?(.+)$/);
@@ -1632,26 +1800,26 @@ function renderMarkdown(value) {
       closeParagraph();
       closeList();
       html.push(`<blockquote>${renderInlineMarkdown(quote[1])}</blockquote>`);
-      return;
+      continue;
     }
 
     const unordered = trimmed.match(/^[-*]\s+(.+)$/);
     if (unordered) {
       openList("ul");
       html.push(`<li>${renderInlineMarkdown(unordered[1])}</li>`);
-      return;
+      continue;
     }
 
     const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
     if (ordered) {
       openList("ol");
       html.push(`<li>${renderInlineMarkdown(ordered[1])}</li>`);
-      return;
+      continue;
     }
 
     closeList();
     paragraph.push(renderInlineMarkdown(trimmed));
-  });
+  }
 
   if (inCodeBlock) {
     html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
