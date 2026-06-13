@@ -1939,6 +1939,37 @@ function getLegalEntityLabel(market) {
   return market.legalEntity;
 }
 
+function getConfiguredChatMarkets(config) {
+  return Array.isArray(config?.markets) ? config.markets : [];
+}
+
+function getGlobalChatMarket(config) {
+  const markets = getConfiguredChatMarkets(config);
+  const configuredGlobal = config?.globalMarket || null;
+  const configuredGlobalId = config?.globalMarketId || configuredGlobal?.id;
+  const matchingMarket = configuredGlobalId
+    ? markets.find((market) => market.id === configuredGlobalId)
+    : null;
+  const fallback = matchingMarket || configuredGlobal || markets[0] || {};
+
+  return {
+    id: fallback.id || "global",
+    label: fallback.label || "Global",
+    legalEntity: fallback.legalEntity || "SmartDigitalMinds",
+    language: fallback.language || currentLanguage,
+    handoffEmail: fallback.handoffEmail || config?.handoffEmail || "agents@smartdigitalminds.com"
+  };
+}
+
+function getSelectedChatMarket(config, marketSelect) {
+  if (config?.useGlobalMarket !== false) {
+    return getGlobalChatMarket(config);
+  }
+
+  const markets = getConfiguredChatMarkets(config);
+  return markets.find((entry) => entry.id === marketSelect?.value) || getGlobalChatMarket(config);
+}
+
 function setText(selector, key) {
   document.querySelectorAll(selector).forEach((element) => {
     element.textContent = translate(key);
@@ -1973,8 +2004,8 @@ function updateLanguageControl() {
 function updateMailLinks() {
   const subject = encodeURIComponent(translate("mail.auditSubject"));
 
-  document.querySelectorAll('a[href^="mailto:agent@smartdigitalminds.com"]').forEach((link) => {
-    link.href = `mailto:agent@smartdigitalminds.com?subject=${subject}`;
+  document.querySelectorAll('a[href^="mailto:agent@smartdigitalminds.com"], a[href^="mailto:agents@smartdigitalminds.com"]').forEach((link) => {
+    link.href = `mailto:agents@smartdigitalminds.com?subject=${subject}`;
   });
 }
 
@@ -2171,13 +2202,20 @@ function syncChatbotCopy() {
   }
 
   if (marketSelect) {
+    const markets = getConfiguredChatMarkets(config);
+    const globalMarket = getGlobalChatMarket(config);
+    const selectMarkets = config.useGlobalMarket === false
+      ? markets
+      : [globalMarket, ...markets.filter((market) => market.id !== globalMarket.id)];
     const selectedMarket = marketSelect.value;
-    marketSelect.innerHTML = config.markets.map((market) => {
+    marketSelect.innerHTML = selectMarkets.map((market) => {
       return `<option value="${escapeHtml(market.id)}">${escapeHtml(getMarketLabel(market))}</option>`;
     }).join("");
 
-    if (selectedMarket && config.markets.some((market) => market.id === selectedMarket)) {
+    if (selectedMarket && selectMarkets.some((market) => market.id === selectedMarket)) {
       marketSelect.value = selectedMarket;
+    } else {
+      marketSelect.value = globalMarket.id;
     }
   }
 
@@ -2233,7 +2271,7 @@ function setupChatbot() {
     const message = input.value.trim();
     if (!message) return;
 
-    const market = config.markets.find((entry) => entry.id === marketSelect.value) || config.markets[0];
+    const market = getSelectedChatMarket(config, marketSelect);
     const intent = intentSelect.value;
     const marketLabel = getMarketLabel(market);
     appendChatMessage(messages, "user", message);

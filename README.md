@@ -44,21 +44,9 @@ Use `../backend/chatbot` for the deployable Go backend and Docker container. `ch
 The chatbot API:
 
 - Receives website chat messages at `/api/chat`.
-- Routes by market: `us`, `spain`, or `uae`.
+- Uses a global market context by default while preserving the `us`, `spain`, and `uae` market configuration for later routing.
 - Forwards the normalized event to `OPENCLAW_AGENT_URL` or `CHAT_AGENT_WEBHOOK_URL` when configured.
 - Adds guardrails for no outbound messaging and permission-first handling.
 - Returns a fallback reply when the real agent webhook is not configured.
 
-The static website reads `chatbot.config.js`. Put only public values there. Keep agent URLs, tokens, and provider credentials in the backend container environment.
-
-
-# Tooling necesario
-
-- HaProxy
-- Podman:
-    - podman build -t sdm:v1.0.1 .
-    - podman run -d --name sdm-site -p 8080:80 sdm:v1.0.1
-- Ollama GPT-OSS:20b
-    - curl -fsSL https://ollama.com/install.sh | sh
-    - ollama pull gpt-oss:20b
-- Build the backend
+The static website reads `chatbot.config.js`. The market selector is currently hidden, and chat requests use `globalMarket` for `marketId`, `marketLabel`, legal entity, and handoff metadata. Put only public values there. Keep agent URLs, tokens, and provider credentials in the backend container environment.

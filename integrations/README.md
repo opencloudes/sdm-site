@@ -44,7 +44,7 @@ Use `../../backend/chatbot` for the deployable Go backend and Docker container. 
 The chatbot API:
 
 - Receives website chat messages at `/api/chat`.
-- Routes by market: `us`, `spain`, or `uae`.
+- Uses `global` as the default website chat market context while keeping `us`, `spain`, and `uae` available for later market-specific routing.
 - Forwards the normalized event to `OPENCLAW_AGENT_URL` or `CHAT_AGENT_WEBHOOK_URL` when configured.
 - Adds guardrails for no outbound messaging and permission-first handling.
 - Returns a fallback reply when the real agent webhook is not configured.

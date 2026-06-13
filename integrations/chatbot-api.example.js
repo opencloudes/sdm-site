@@ -7,6 +7,13 @@ const FALLBACK_EMAIL = process.env.CHAT_FALLBACK_EMAIL || "agents@smartdigitalmi
 const DEMO_FALLBACK = process.env.CHAT_DEMO_FALLBACK !== "false";
 
 const markets = {
+  global: {
+    id: "global",
+    label: process.env.SDM_CHATBOT_GLOBAL_LABEL || "Global",
+    enabled: process.env.SDM_CHATBOT_GLOBAL_ENABLED !== "false",
+    legalEntity: process.env.SDM_CHATBOT_GLOBAL_LEGAL_ENTITY || "SmartDigitalMinds",
+    handoffEmail: process.env.SDM_CHATBOT_GLOBAL_HANDOFF_EMAIL || FALLBACK_EMAIL
+  },
   us: {
     id: "us",
     label: "United States",

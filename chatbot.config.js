@@ -5,6 +5,14 @@ window.SDM_CHATBOT_CONFIG = {
   handoffEmail: "agents@smartdigitalminds.com",
   assistantName: "SmartDigitalMinds Assistant",
   initialMessage: "Hi. I can help scope an agent audit, lead follow-up workflow, operations automation, WhatsApp integration, and many other workflows.",
+  useGlobalMarket: true,
+  globalMarket: {
+    id: "global",
+    label: "Global",
+    legalEntity: "SmartDigitalMinds",
+    language: "en",
+    handoffEmail: "agents@smartdigitalminds.com"
+  },
   markets: [
     {
       id: "us",

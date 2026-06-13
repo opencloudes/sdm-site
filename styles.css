@@ -747,6 +747,10 @@ input {
   background: var(--paper);
 }
 
+.chatbot__controls--global-market {
+  grid-template-columns: 1fr;
+}
+
 .chatbot__controls label {
   display: grid;
   gap: 4px;
@@ -754,6 +758,10 @@ input {
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.chatbot__controls label[hidden] {
+  display: none;
 }
 
 .chatbot__controls select {
