@@ -16,7 +16,7 @@
     <meta property="og:title" content="SmartDigitalMinds | Business Agent Operations">
     <meta property="og:description" content="AI agents for lead intake, follow-up, back-office automation, reporting, WhatsApp workflows, and business operations.">
     <meta property="og:url" content="https://smartdigitalminds.com/">
-    <meta property="og:image" content="https://smartdigitalminds.com/assets/agent-operations-hero.png">
+    <meta property="og:image" content="https://smartdigitalminds.com/assets/agent-operations-hero.webp">
     <meta property="og:image:width" content="1672">
     <meta property="og:image:height" content="941">
     <meta property="og:image:alt" content="SmartDigitalMinds business agent operations">
@@ -24,9 +24,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SmartDigitalMinds | Business Agent Operations">
     <meta name="twitter:description" content="AI agents for lead intake, follow-up, back-office automation, reporting, WhatsApp workflows, and business operations.">
-    <meta name="twitter:image" content="https://smartdigitalminds.com/assets/agent-operations-hero.png">
-    <link rel="icon" href="assets/sdm-ico.png" type="image/png">
-    <link rel="apple-touch-icon" href="assets/sdm-ico.png">
+    <meta name="twitter:image" content="https://smartdigitalminds.com/assets/agent-operations-hero.webp">
+    <link rel="icon" href="assets/sdm-ico.webp" type="image/webp">
+    <link rel="apple-touch-icon" href="assets/sdm-ico.webp">
     <link rel="stylesheet" href="styles.css">
     <script type="application/ld+json">
       {
@@ -34,7 +34,7 @@
         "@type": "Organization",
         "name": "SmartDigitalMinds",
         "url": "https://smartdigitalminds.com/",
-        "logo": "https://smartdigitalminds.com/assets/smartdigitalminds-logo.png",
+        "logo": "https://smartdigitalminds.com/assets/smartdigitalminds-logo.webp",
         "email": "agents@smartdigitalminds.com",
         "description": "SmartDigitalMinds builds and runs practical AI agents for business workflows where speed, follow-up, reporting, and consistency create measurable value.",
         "areaServed": [
@@ -121,7 +121,7 @@
   <body>
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="SmartDigitalMinds home">
-        <img src="assets/sdm.png" alt="SmartDigitalMinds">
+        <img src="assets/sdm.webp" alt="SmartDigitalMinds">
       </a>
       <div class="header-actions">
         <nav class="site-nav" aria-label="Main navigation">
@@ -274,27 +274,27 @@
           <form class="calculator" data-calculator>
             <label class="range-field">
               <span>Hours saved per week</span>
-              <output data-output="hours">8</output>
-              <input type="range" name="hours" min="1" max="40" value="8">
+              <output data-output="hours">20</output>
+              <input type="range" name="hours" min="1" max="40" value="20">
             </label>
             <label class="range-field">
               <span>Hourly business value</span>
-              <output data-output="rate">$75</output>
-              <input type="range" name="rate" min="25" max="250" step="5" value="75">
+              <output data-output="rate">$95</output>
+              <input type="range" name="rate" min="25" max="250" step="5" value="95">
             </label>
             <label class="range-field">
               <span>Recovered leads per month</span>
-              <output data-output="leads">6</output>
-              <input type="range" name="leads" min="0" max="40" value="6">
+              <output data-output="leads">2</output>
+              <input type="range" name="leads" min="0" max="40" value="2">
             </label>
             <label class="range-field">
               <span>Average lead value</span>
-              <output data-output="leadValue">$180</output>
-              <input type="range" name="leadValue" min="50" max="1500" step="10" value="180">
+              <output data-output="leadValue">$250</output>
+              <input type="range" name="leadValue" min="50" max="1500" step="10" value="250">
             </label>
             <div class="calculator__result" aria-live="polite">
               <span>Estimated monthly value</span>
-              <strong data-total>$3,480</strong>
+              <strong data-total>$8,100</strong>
             </div>
           </form>
         </div>
@@ -362,7 +362,7 @@
     <section class="chatbot" data-chatbot aria-label="SmartDigitalMinds chat assistant">
       <button class="chatbot__toggle" type="button" data-chat-toggle aria-expanded="false" aria-controls="chatbot-panel">
         <span class="chatbot__toggle-icon" aria-hidden="true">
-          <img src="assets/operator-photo-avatar.png" alt="">
+          <img src="assets/operator-photo-avatar.webp" alt="">
         </span>
         <span>Agent chat</span>
       </button>
@@ -401,7 +401,7 @@
 
     <footer class="site-footer">
       <div class="site-footer__inner">
-        <img src="assets/sdm-ico.png" alt="" aria-hidden="true">
+        <img src="assets/sdm-ico.webp" alt="" aria-hidden="true">
         <p>2026 &copy SmartDigitalMinds builds and runs business agents focused on automation value.</p>
       </div>
     </footer>
@@ -410,5 +410,15 @@
     <script src="chatbot.config.js"></script>
     <script src="script.js"></script>
     <script src="matomo.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-671L3Z0BQ6">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-671L3Z0BQ6');
+</script>
   </body>
 </html>
